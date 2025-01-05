@@ -9,7 +9,7 @@ class RoomTypeController extends Controller
 {
     /**
      * Display a listing of the room types.
-     * http://localhost:8000/api/room_types
+     * http://localhost:8000/api/roomTypes
      */
 
      public function index(){
@@ -22,7 +22,7 @@ class RoomTypeController extends Controller
 
      /**
       * Create new room type
-      *http://localhost:8000/api/room_types/
+      *http://localhost:8000/api/roomTypes/
       */
 
       public function create(Request $request){
@@ -38,52 +38,49 @@ class RoomTypeController extends Controller
             ], 400);
         }
     
-        $room_type = RoomType::create($validator->validated());
+        $roomType = RoomType::create($validator->validated());
         return response()->json([
             'ok' => true,
             'message' => 'Room Type Created Successfully',
-            'data' => $room_type
+            'data' => $roomType
         ], 200);
     }
-
+    
     /**
      * Update room type
-     *http://localhost:8000/api/room_types/{room_type}
+     * http://localhost:8000/api/roomTypes/{id}
      */
-
-    public function update(Request $request, Roomtype $room_type) {
+    public function update(Request $request, RoomType $roomType){
         $validator = validator($request->all(), [
-            'room_type' => 'required|max:30',
+            'room_type' => 'required | max:30 ',
         ]);
-
-        if ($validator->fails()) {
+    
+        if($validator->fails()){
             return response()->json([
                 'ok' => false,
                 'message' => 'Room Type Update Failed',
                 'errors' => $validator->errors()
             ], 400);
         }
-
-        $room_type->update($validator->validated());
+    
+        $roomType->update($validator->validated());
         return response()->json([
             'ok' => true,
             'message' => 'Room Type Updated Successfully',
-            'data' => $room_type
+            'data' => $roomType
         ], 200);
     }
 
-
     /**
      * Delete room type
-     * http://localhost:8000/api/room_types
+     * http://localhost:8000/api/roomTypes/{id}
      */
-
-     public function destroy(Roomtype $room_type){
-        $room_type->delete();
+    public function destroy(RoomType $roomType){
+        $roomType->delete();
         return response()->json([
             'ok' => true,
             'message' => 'Room Type Deleted Successfully',
-            'data' => $room_type
+            'data' => $roomType
         ], 200);
-     }
+    }
 }
