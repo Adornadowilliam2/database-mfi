@@ -42,17 +42,24 @@ class RoomController extends Controller
             ], 400);
         }
 
-        $validated = $validator->validated();
-
+        $imagePath = null;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $destinationPath = public_path('/images');
-            $name = time() . '.' . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $name);
-            $validated['image'] = $name;
+            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(storage_path('app/public/images'), $filename);
+            $imagePath = 'images/' . $filename;
         }
+    
 
-        $room = Room::create($validated);
+        $room = Room::create([
+            'room_name' => $request->room_name,
+            'room_type_id' => $request->room_type_id,
+            'location' => $request->location,
+            'description' => $request->description,
+            'capacity' => $request->capacity,
+            'image' => $imagePath,  
+        ]);
+ 
 
         return response()->json([
             'ok' => true,
@@ -96,17 +103,24 @@ class RoomController extends Controller
             ], 400);
         }
 
-        $validated = $validator->validated();
-
+        $imagePath = null;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $destinationPath = public_path('/images');
-            $name = time() . '.' . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $name);
-            $validated['image'] = $name;
+            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(storage_path('app/public/images'), $filename);
+            $imagePath = 'images/' . $filename;
         }
+    
 
-        $room->update($validated);
+        $room->update([
+            'room_name' => $request->room_name,
+            'room_type_id' => $request->room_type_id,
+            'location' => $request->location,
+            'description' => $request->description,
+            'capacity' => $request->capacity,
+            'image' => $imagePath,  
+        ]);
+ 
 
         return response()->json([
             'ok' => true,
