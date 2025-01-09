@@ -273,7 +273,7 @@ class DatabaseSeeder extends Seeder
             'book_from' => '2024-12-29',
             'book_until' => '2024-12-29',
         ]);
-        // Booking 2
+    
         Booking::create([
             'user_id' => 2,
             'room_id' => 2,
@@ -285,6 +285,110 @@ class DatabaseSeeder extends Seeder
             'status' => 'confirmed',
             'book_from' => '2024-12-29',
             'book_until' => '2024-12-29',
+        ]);
+    
+        Booking::create([
+            'user_id' => 3,
+            'room_id' => 3,
+            'subject_id' => 2,
+            'section_id' => 1,
+            'start_time' => '2024-12-30 08:00:00',
+            'end_time' => '2024-12-30 09:00:00',
+            'day_of_week' => 'Tuesday',
+            'status' => 'pending',
+            'book_from' => '2024-12-30',
+            'book_until' => '2024-12-30',
+        ]);
+    
+        Booking::create([
+            'user_id' => 4,
+            'room_id' => 4,
+            'subject_id' => 3,
+            'section_id' => 3,
+            'start_time' => '2024-12-30 10:00:00',
+            'end_time' => '2024-12-30 11:00:00',
+            'day_of_week' => 'Tuesday',
+            'status' => 'confirmed',
+            'book_from' => '2024-12-30',
+            'book_until' => '2024-12-30',
+        ]);
+    
+        Booking::create([
+            'user_id' => 5,
+            'room_id' => 5,
+            'subject_id' => 4,
+            'section_id' => 1,
+            'start_time' => '2024-12-31 13:00:00',
+            'end_time' => '2024-12-31 14:00:00',
+            'day_of_week' => 'Wednesday',
+            'status' => 'confirmed',
+            'book_from' => '2024-12-31',
+            'book_until' => '2024-12-31',
+        ]);
+    
+        Booking::create([
+            'user_id' => 6,
+            'room_id' => 6,
+            'subject_id' => 5,
+            'section_id' => 2,
+            'start_time' => '2024-12-31 15:00:00',
+            'end_time' => '2024-12-31 16:00:00',
+            'day_of_week' => 'Wednesday',
+            'status' => 'confirmed',
+            'book_from' => '2024-12-31',
+            'book_until' => '2024-12-31',
+        ]);
+    
+        Booking::create([
+            'user_id' => 7,
+            'room_id' => 7,
+            'subject_id' => 6,
+            'section_id' => 3,
+            'start_time' => '2025-01-01 09:00:00',
+            'end_time' => '2025-01-01 10:00:00',
+            'day_of_week' => 'Thursday',
+            'status' => 'confirmed',
+            'book_from' => '2025-01-01',
+            'book_until' => '2025-01-01',
+        ]);
+    
+        Booking::create([
+            'user_id' => 8,
+            'room_id' => 8,
+            'subject_id' => 7,
+            'section_id' => 1,
+            'start_time' => '2025-01-02 11:00:00',
+            'end_time' => '2025-01-02 12:00:00',
+            'day_of_week' => 'Friday',
+            'status' => 'pending',
+            'book_from' => '2025-01-02',
+            'book_until' => '2025-01-02',
+        ]);
+    
+        Booking::create([
+            'user_id' => 9,
+            'room_id' => 9,
+            'subject_id' => 8,
+            'section_id' => 2,
+            'start_time' => '2025-01-03 14:00:00',
+            'end_time' => '2025-01-03 15:00:00',
+            'day_of_week' => 'Saturday',
+            'status' => 'confirmed',
+            'book_from' => '2025-01-03',
+            'book_until' => '2025-01-03',
+        ]);
+    
+        Booking::create([
+            'user_id' => 10,
+            'room_id' => 10,
+            'subject_id' => 9,
+            'section_id' => 3,
+            'start_time' => '2025-01-04 16:00:00',
+            'end_time' => '2025-01-04 17:00:00',
+            'day_of_week' => 'Sunday',
+            'status' => 'confirmed',
+            'book_from' => '2025-01-04',
+            'book_until' => '2025-01-04',
         ]);
         // Continue creating other bookings...
         

@@ -12,10 +12,11 @@ class RoomController extends Controller
      * http://localhost/8000/api/rooms/
      */
     public function index(){
+        $rooms = Room::with(['roomtypes'])->get();
         return response()->json([
             'ok' => true,
             'message' => 'Retrieved Successfully',
-            'data' => Room::all()
+            'data' => $rooms
         ], 200);
     }
 

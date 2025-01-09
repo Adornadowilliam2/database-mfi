@@ -28,4 +28,8 @@ class room extends Model
     public function bookings(){
         return $this->hasMany(Booking::class);
     }
+
+    public function roomtypes(){
+        return $this->belongsTo(RoomType::class, 'room_type_id', 'id');
+    }
 }
