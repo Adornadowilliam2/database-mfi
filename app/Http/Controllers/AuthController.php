@@ -53,7 +53,7 @@ class AuthController extends Controller
         if($validator->fails()){
             return response()->json([
                 'ok' => false,
-                'message' => 'Login Failed',
+                'message' => "Request didn't pass validation!",
                 'errors' => $validator->errors()
             ], 400);
         }
@@ -70,7 +70,7 @@ class AuthController extends Controller
 
         return response()->json([
             'ok' => false,
-            'message' => 'Login Failed',     
+            'message' => 'Wrong email or password, Please try again!',     
             'errors' => 'Invalid Credentials'       
         ], 401);
 
