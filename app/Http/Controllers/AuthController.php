@@ -14,7 +14,7 @@ class AuthController extends Controller
     
      public function register(Request $request){
         $validator = validator($request->all(), [
-            'name' => 'required| min:3',
+            'username' => 'required| min:3',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|confirmed',
             'role' => 'sometimes|in:admin,user'
@@ -45,36 +45,40 @@ class AuthController extends Controller
       */
 
       public function login(Request $request){
-        $validator = validator($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
-        if($validator->fails()){
+          $validator = validator($request->all(), [
+              'username' => 'required',
+              'password' => 'required',
+          ]);
+  
+          if ($validator->fails()) {
             return response()->json([
                 'ok' => false,
-                'message' => "Request didn't pass validation!",
+                'message' => 'Registration Failed',
                 'errors' => $validator->errors()
             ], 400);
-        }
-
-        if(auth()->attempt($validator->validated())){
-            $user = auth()->user();
-            $user->token = $user->createToken('auth-api')->accessToken; 
-            return response()->json([
+          }
+  
+          $credentials = $request->only('username', 'password');
+  
+          if (auth()->attempt(['email' => $credentials['username'], 'password' => $credentials['password']]) ||
+              auth()->attempt(['username' => $credentials['username'], 'password' => $credentials['password']])
+          ) {
+              $user = auth()->user();
+              $user->token = $user->createToken('api-token')->accessToken;
+  
+              return response()->json([
                 'ok' => true,
-                'message' => 'Login Success',
+                'message' => 'Registration Success',
                 'data' => $user
-            ], 200);
-        }
-
-        return response()->json([
+            ], 201);
+          }
+  
+          return response()->json([
             'ok' => false,
-            'message' => 'Wrong email or password, Please try again!',     
-            'errors' => 'Invalid Credentials'       
+            'message' => 'Incorrect Username/Email or Password',
+            'errors' => $validator->errors()
         ], 401);
-
-    }
+      }
         /**
          * checkToken
          * http://localhost:8000/api/checkToken
