@@ -60,13 +60,13 @@ class AuthController extends Controller
   
           $credentials = $request->only('username', 'password');
   
-          if (auth()->attempt(['email' => $credentials['username'], 'password' => $credentials['password']]) ) {
+          if (auth()->attempt(['username' => $credentials['username'], 'password' => $credentials['password']]) ) {
               $user = auth()->user();
               $user->token = $user->createToken('api-token')->accessToken;
   
               return response()->json([
                 'ok' => true,
-                'message' => 'Registration Success',
+                'message' => 'Login Success',
                 'data' => $user
             ], 201);
           }

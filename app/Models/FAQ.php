@@ -13,5 +13,6 @@ class FAQ extends Model
         'paragraph',
         'enroll',
         'cta',
+        'program'
     ];
 }

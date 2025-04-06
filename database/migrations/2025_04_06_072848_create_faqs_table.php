@@ -17,7 +17,9 @@ return new class extends Migration
             $table->text('paragraph');
             $table->text('enroll')->nullable();
             $table->string('cta');
+            $table->enum('program', ['general question', 'short course', 'dts program', 'senior high', 'gt foundation', 'tesda-twsp', 'others scholarship'])->default('general question');
             $table->timestamps();
+
         });
     }
 

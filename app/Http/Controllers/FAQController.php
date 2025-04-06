@@ -11,23 +11,24 @@ class FAQController extends Controller
      */
     public function insert(Request $request){
         $validator = validator($request->all(), [
-            'question' => 'required',
-            'paragraph' => 'required',
+            'question' => 'required|unique:faqs,question',
+            'paragraph' => 'required|unique:faqs,paragraph',
             'enroll' => 'sometimes',
-            'cta' => 'required'
+            'cta' => 'required',
+            'program' => 'required|in:general question,short course,dts program,senior high,gt foundation,tesda-twsp,others scholarship'
         ]);
 
         if($validator->fails()){
             return response()->json([
                 'ok' => false,
-                'message' => 'Registration Failed',
+                'message' => 'Add Failed',
                 'errors' => $validator->errors()
             ], 400);
         }
         $faq = FAQ::create($validator->validated());
         return response()->json([
             'ok' => true,
-            'message' => 'Registration Success',
+            'message' => 'Add Success',
             'data' => $faq
         ], 201);
     }
@@ -51,7 +52,8 @@ class FAQController extends Controller
             'question' => 'required',
             'paragraph' => 'required',
             'enroll' => 'sometimes',
-            'cta' => 'required'
+            'cta' => 'required',
+            'program' => 'required|in:general question,short course,dts program,senior high,gt foundation,tesda-twsp,others scholarship'
         ]);
 
         if($validator->fails()){
