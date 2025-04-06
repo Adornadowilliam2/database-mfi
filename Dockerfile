@@ -13,11 +13,8 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
-RUN php artisan migrate --force
+RUN php artisan migrate:fresh --seed --force
 
-RUN php artisan passport:keys --no-interaction
-
-RUN php artisan passport:client --personal --no-interaction
 
 RUN chown -R www-data:www-data /var/www
 RUN chmod -R 775 storage bootstrap/cache
