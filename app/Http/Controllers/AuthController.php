@@ -15,7 +15,7 @@ class AuthController extends Controller
      public function register(Request $request){
         $validator = validator($request->all(), [
             'username' => 'required| min:3',
-            'email' => 'required|email|unique:users',
+       
             'password' => 'required|min:8|confirmed',
             'role' => 'sometimes|in:admin,user'
         ]);
@@ -60,9 +60,7 @@ class AuthController extends Controller
   
           $credentials = $request->only('username', 'password');
   
-          if (auth()->attempt(['email' => $credentials['username'], 'password' => $credentials['password']]) ||
-              auth()->attempt(['username' => $credentials['username'], 'password' => $credentials['password']])
-          ) {
+          if (auth()->attempt(['email' => $credentials['username'], 'password' => $credentials['password']]) ) {
               $user = auth()->user();
               $user->token = $user->createToken('api-token')->accessToken;
   
@@ -76,7 +74,7 @@ class AuthController extends Controller
           return response()->json([
             'ok' => false,
             'message' => 'Incorrect Username/Email or Password',
-            'errors' => $validator->errors()
+
         ], 401);
       }
         /**
@@ -105,5 +103,4 @@ class AuthController extends Controller
             ], 200);
           }
 
-       
 }
